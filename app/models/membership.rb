@@ -12,6 +12,12 @@ class Membership < LogicalModel
 
   def self.find_current_membership(account, contact_id)
     self.set_resource_path "/api/v0/businesses/#{account}/contacts/#{contact_id}/current_membership"
-    return self.find("")
+    result = nil
+    begin
+      result = self.find("")
+    rescue
+      result = nil
+    end
+    return result
   end
 end
