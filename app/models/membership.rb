@@ -8,7 +8,7 @@ class Membership < LogicalModel
   attribute :ends_on                      # The finishing date
   attribute :value                        # The value
 
-  has_many :installments, class: 'Installment'
+  self.has_many_keys = [:installments]
 
   def self.find_current_membership(account, contact_id)
     self.set_resource_path "/api/v0/businesses/#{account}/contacts/#{contact_id}/current_membership"
