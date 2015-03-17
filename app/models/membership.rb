@@ -7,6 +7,8 @@ class Membership < LogicalModel
   attribute :begins_on                    # The starting date
   attribute :ends_on                      # The finishing date
   attribute :value                        # The value
+  attribute :payment_type
+  attribute :padma_contact_id
 
   self.has_many_keys = [:installments]
 
@@ -19,5 +21,16 @@ class Membership < LogicalModel
       result = nil
     end
     return result
+  end
+
+  def self.find_current_memberships(account, contact_ids)
+    self.set_resource_path "/api/v0/businesses/#{account}/current_memberships"
+    results = nil
+    begin
+      results = self.all(:padma_contact_ids => contact_ids)
+    rescue
+      results = nil
+    end
+    return results
   end
 end
