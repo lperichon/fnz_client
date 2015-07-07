@@ -7,7 +7,7 @@ class Membership < LogicalModel
   attribute :begins_on                    # The starting date
   attribute :ends_on                      # The finishing date
   attribute :value                        # The value
-  attribute :payment_type
+  attribute :name
   attribute :padma_contact_id
 
   self.has_many_keys = [:installments]
